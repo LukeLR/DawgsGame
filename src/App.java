@@ -13,39 +13,8 @@ public class App{
 		//TODO: Use a loop
 		Card[] cards = initCards();
 		for (int b0 = 0; b0 < 4; b0++){
-			for (int b1 = 0; b1 < 4; b1++){
-				for (int b2 = 0; b2 < 4; b2++){
-					for(int b3 = 0; b3 < 4; b3++){
-						for (int b4 = 0; b4 < 4; b4++){
-							for (int b5 = 0; b5 < 4; b5++){
-								for (int b6 = 0; b6 < 4; b6++){
-									for (int b7 = 0; b7 < 4; b7++){
-										for (int b8 = 0; b8 < 4; b8++){
-											startNewThread(cards);
-//											tryAllCombinations(cards);
-											cards[8].rotate();
-//											printRotations(cards);
-//											try {
-//												Thread.sleep(100);
-//											} catch (InterruptedException e) {
-//												// TODO Auto-generated catch block
-//												e.printStackTrace();
-//											}
-										}
-										cards[7].rotate();
-									}
-									cards[6].rotate();
-								}
-								cards[5].rotate();
-							}
-							cards[4].rotate();
-						}
-						cards[3].rotate();
-					}
-					cards[2].rotate();
-				}
-				cards[1].rotate();
-			}
+//			App.startNewRotationThread(cards.clone());
+			App.tryAllRotations(cards);
 			cards[0].rotate();
 		}
 	}
@@ -92,6 +61,43 @@ public class App{
 		return result;
 	}
 	
+	public static void tryAllRotations(Card[] cards){
+		System.out.println("Banane");
+		for (int b1 = 0; b1 < 4; b1++){
+			for (int b2 = 0; b2 < 4; b2++){
+				for(int b3 = 0; b3 < 4; b3++){
+					for (int b4 = 0; b4 < 4; b4++){
+						for (int b5 = 0; b5 < 4; b5++){
+							for (int b6 = 0; b6 < 4; b6++){
+								for (int b7 = 0; b7 < 4; b7++){
+									for (int b8 = 0; b8 < 4; b8++){
+//										startNewThread(cards);
+										tryAllCombinations(cards);
+										cards[8].rotate();
+//										printRotations(cards);
+//										try {
+//											Thread.sleep(100);
+//										} catch (InterruptedException e) {
+//											// TODO Auto-generated catch block
+//											e.printStackTrace();
+//										}
+									}
+									cards[7].rotate();
+								}
+								cards[6].rotate();
+							}
+							cards[5].rotate();
+						}
+						cards[4].rotate();
+					}
+					cards[3].rotate();
+				}
+				cards[2].rotate();
+			}
+			cards[1].rotate();
+		}
+	}
+	
 	public static void tryAllCombinations(Card[] cards){
 		Card[][] c = new Card[3][3];
 		for (int a0 = 0; a0 < 9; a0++){
@@ -121,7 +127,7 @@ public class App{
 																		if(!equalsAny(a8, a7, a6, a5, a4, a3, a2, a1, a0)){
 																			c[2][2] = cards[a8];
 																			num++;
-																			if (num % 1000000 == 0){
+																			if (num % 10000000 == 0){
 																				Duration d = Duration.between(start, LocalDateTime.now());
 																				if (d.getSeconds() != 0){
 																					System.out.println(num + " combinations in " + d.getSeconds() + " seconds (" + num/d.getSeconds() + " combinations/sec, " + threadNum + " Threads)");																					
@@ -186,10 +192,10 @@ public class App{
 		System.out.println();
 	}
 	
-	public static void startNewThread(Card[] cards){
-		class BananeThread extends Thread{
+	public static void startNewCombinationThread(Card[] cards){
+		class CombinationThread extends Thread{
 			private Card[] cards;
-			public BananeThread(Card[] cards){
+			public CombinationThread(Card[] cards){
 				this.cards = cards;
 			}
 			public void run(){
@@ -199,7 +205,7 @@ public class App{
 			}
 		}
 		if (threadNum < 10){
-			new BananeThread(cards.clone()).start();
+			new CombinationThread(cards.clone()).start();
 		} else {
 			try {
 				Thread.sleep(10);
@@ -207,7 +213,22 @@ public class App{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			startNewThread(cards);
+			startNewCombinationThread(cards);
 		}
+	}
+	
+	public static void startNewRotationThread(Card[] cards){
+		class RotationThread extends Thread{
+			private Card[] cards;
+			public RotationThread(Card[] cards){
+				this.cards = cards;
+			}
+			public void run(){
+				App.threadNum++;
+				App.tryAllRotations(cards);
+				App.threadNum--;
+			}
+		}
+		new RotationThread(cards).start();
 	}
 }
