@@ -6,15 +6,15 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.StackPane;
 
 public class App{
-	public static int num = 0;
+	public static long num = 0;
 	public static int threadNum = 0;
 	public static LocalDateTime start = LocalDateTime.now();
 	public static void main(String[] args){
 		//TODO: Use a loop
 		Card[] cards = initCards();
 		for (int b0 = 0; b0 < 4; b0++){
-//			App.startNewRotationThread(cards.clone());
-			App.tryAllRotations(cards);
+			App.startNewRotationThread(cards.clone());
+//			App.tryAllRotations(cards);
 			cards[0].rotate();
 		}
 	}
