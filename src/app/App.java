@@ -18,7 +18,7 @@ public class App{
 		//TODO: Use a loop
 		Card[] cards = initCards();
 		for (int b0 = 0; b0 < 4; b0++){
-			App.startNewRotationThread(cards.clone());
+			App.startNewRotationThread(cards.clo ne());
 //			App.tryAllRotations(cards);
 			cards[1].rotate();
 		}
