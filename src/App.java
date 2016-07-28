@@ -1,9 +1,14 @@
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.Collection;
 
 import javafx.scene.control.TableView;
 import javafx.scene.layout.StackPane;
 
 public class App{
+	public static int num = 0;
+	public static int threadNum = 0;
+	public static LocalDateTime start = LocalDateTime.now();
 	public static void main(String[] args){
 		//TODO: Use a loop
 		Card[] cards = initCards();
@@ -16,7 +21,8 @@ public class App{
 								for (int b6 = 0; b6 < 4; b6++){
 									for (int b7 = 0; b7 < 4; b7++){
 										for (int b8 = 0; b8 < 4; b8++){
-											tryAllCombinations(cards);
+											startNewThread(cards);
+//											tryAllCombinations(cards);
 											cards[8].rotate();
 //											printRotations(cards);
 //											try {
@@ -94,7 +100,7 @@ public class App{
 				if (!equalsAny(a1, a0)){
 					c[0][1] = cards[a1];
 					for (int a2 = 0; a2 < 9; a2++){
-						if (!equalsAny(a2, a1, a1)){
+						if (!equalsAny(a2, a1, a0)){
 							c[0][2] = cards[a2];
 							for (int a3 = 0; a3 < 9; a3++){
 								if(!equalsAny(a3, a2, a1, a0)){
@@ -114,13 +120,24 @@ public class App{
 																	for (int a8 = 0; a8 < 9; a8++){
 																		if(!equalsAny(a8, a7, a6, a5, a4, a3, a2, a1, a0)){
 																			c[2][2] = cards[a8];
-																			printBoard(c);
-																			try {
-																				Thread.sleep(3000);
-																			} catch (InterruptedException e) {
-																				// TODO Auto-generated catch block
-																				e.printStackTrace();
+																			num++;
+																			if (num % 1000000 == 0){
+																				Duration d = Duration.between(start, LocalDateTime.now());
+																				if (d.getSeconds() != 0){
+																					System.out.println(num + " combinations in " + d.getSeconds() + " seconds (" + num/d.getSeconds() + " combinations/sec, " + threadNum + " Threads)");																					
+																				} else {
+																					System.out.println("waiting...");
+																				}
 																			}
+//																			num = (num + 1) % 1000000;
+																			if (num == 0) printBoard(c);
+//																			printBoard(c);
+//																			try {
+//																				Thread.sleep(100);
+//																			} catch (InterruptedException e) {
+//																				// TODO Auto-generated catch block
+//																				e.printStackTrace();
+//																			}
 																		}
 																	}
 																}
@@ -167,5 +184,30 @@ public class App{
 		}
 		System.out.println();
 		System.out.println();
+	}
+	
+	public static void startNewThread(Card[] cards){
+		class BananeThread extends Thread{
+			private Card[] cards;
+			public BananeThread(Card[] cards){
+				this.cards = cards;
+			}
+			public void run(){
+				App.threadNum++;
+				App.tryAllCombinations(cards);
+				App.threadNum--;
+			}
+		}
+		if (threadNum < 10){
+			new BananeThread(cards.clone()).start();
+		} else {
+			try {
+				Thread.sleep(10);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			startNewThread(cards);
+		}
 	}
 }
