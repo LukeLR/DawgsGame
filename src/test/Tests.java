@@ -15,7 +15,7 @@ public class Tests {
 		cards[0] = new Card(0, Card.STRIPED_BUTT, Card.STRIPED_HEAD, Card.STRIPED_BUTT, Card.STRIPED_HEAD);
 		cards[1] = new Card(1, Card.STRIPED_HEAD, Card.STRIPED_BUTT, Card.STRIPED_HEAD, Card.STRIPED_BUTT);
 		cards[2] = new Card(2, Card.STRIPED_BUTT, Card.STRIPED_HEAD, Card.STRIPED_BUTT, Card.STRIPED_HEAD);
-		cards[3] = new Card(3, Card.NAKED_BUTT, Card.STRIPED_BUTT, Card.STRIPED_HEAD, Card.STRIPED_BUTT);
+		cards[3] = new Card(3, Card.NAKED_BUTT, Card.NAKED_BUTT, Card.NAKED_BUTT, Card.NAKED_BUTT);
 		cards[4] = new Card(4, Card.STRIPED_BUTT, Card.STRIPED_HEAD, Card.STRIPED_BUTT, Card.STRIPED_HEAD);
 		cards[5] = new Card(5, Card.STRIPED_HEAD, Card.STRIPED_BUTT, Card.STRIPED_HEAD, Card.STRIPED_BUTT);
 		cards[6] = new Card(6, Card.STRIPED_BUTT, Card.STRIPED_HEAD, Card.STRIPED_BUTT, Card.STRIPED_HEAD);

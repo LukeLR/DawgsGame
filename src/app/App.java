@@ -14,15 +14,15 @@ public class App{
 	public static LocalDateTime start = LocalDateTime.now();
 	public static StringBuilder outputBuilder;
 	public static int writesPending = 0;
-//	public static void main(String[] args){
-//		//TODO: Use a loop
-//		Card[] cards = initCards();
-//		for (int b0 = 0; b0 < 4; b0++){
-//			App.startNewRotationThread(cards.clone());
-////			App.tryAllRotations(cards);
-//			cards[0].rotate();
-//		}
-//	}
+	public static void main(String[] args){
+		//TODO: Use a loop
+		Card[] cards = initCards();
+		for (int b0 = 0; b0 < 4; b0++){
+			App.startNewRotationThread(cards.clone());
+//			App.tryAllRotations(cards);
+			cards[1].rotate();
+		}
+	}
 	
 
 	public static Card[] initCards(){
@@ -68,7 +68,7 @@ public class App{
 	}
 	
 	public static void tryAllRotations(Card[] cards){
-		for (int b1 = 0; b1 < 4; b1++){
+//		for (int b1 = 0; b1 < 4; b1++){
 			for (int b2 = 0; b2 < 4; b2++){
 				for(int b3 = 0; b3 < 4; b3++){
 					for (int b4 = 0; b4 < 4; b4++){
@@ -99,26 +99,26 @@ public class App{
 				}
 				cards[2].rotate();
 			}
-			cards[1].rotate();
-		}
+//			cards[1].rotate();
+//		}
 	}
 	
 	public static void tryAllCombinations(Card[] cards){
 		Card[][] c = new Card[3][3];
 		for (int a0 = 0; a0 < 9; a0++){
-			c[0][0] = cards[a0];
+			c[1][1] = cards[a0];
 			for (int a1 = 0; a1 < 9; a1++){
 				if (!equalsAny(a1, a0)){
-					c[0][1] = cards[a1];
+					c[0][0] = cards[a1];
 					for (int a2 = 0; a2 < 9; a2++){
 						if (!equalsAny(a2, a1, a0)){
-							c[0][2] = cards[a2];
+							c[0][1] = cards[a2];
 							for (int a3 = 0; a3 < 9; a3++){
 								if(!equalsAny(a3, a2, a1, a0)){
-									c[1][0] = cards[a3];
+									c[0][2] = cards[a3];
 									for(int a4 = 0; a4 < 9; a4++){
 										if(!equalsAny(a4, a3, a2, a1, a0)){
-											c[1][1] = cards[a4];
+											c[1][0] = cards[a4];
 											for(int a5 = 0; a5 < 9; a5++){
 												if(!equalsAny(a5, a4, a3, a2, a1, a0)){
 													c[1][2] = cards[a5];
