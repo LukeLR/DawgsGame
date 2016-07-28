@@ -130,7 +130,7 @@ public class App{
 																			if (num % 10000000 == 0){
 																				Duration d = Duration.between(start, LocalDateTime.now());
 																				if (d.getSeconds() != 0){
-																					System.out.println(num + " combinations in " + d.getSeconds() + " seconds (" + num/d.getSeconds() + " combinations/sec, " + threadNum + " Threads)");																					
+																					System.out.println(num/1000000 + " million combinations in " + d.getSeconds() + " seconds (" + num/d.getSeconds() + " combinations/sec, " + threadNum + " Threads)");																					
 																				} else {
 																					System.out.println("waiting...");
 																				}
