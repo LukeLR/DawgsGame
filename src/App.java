@@ -16,9 +16,9 @@ public class App{
 								for (int b6 = 0; b6 < 4; b6++){
 									for (int b7 = 0; b7 < 4; b7++){
 										for (int b8 = 0; b8 < 4; b8++){
-											cards[8].rotate();
 											tryAllCombinations(cards);
-											printRotations(cards);
+											cards[8].rotate();
+//											printRotations(cards);
 //											try {
 //												Thread.sleep(100);
 //											} catch (InterruptedException e) {
