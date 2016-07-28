@@ -1,3 +1,4 @@
+package app;
 public class Card {
 	public static final int NAKED_BUTT = 0;
 	public static final int NAKED_HEAD = 1;

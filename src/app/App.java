@@ -1,23 +1,29 @@
+package app;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.Collection;
-
-import javafx.scene.control.TableView;
-import javafx.scene.layout.StackPane;
+import java.io.File;
+import java.io.FileReader;
 
 public class App{
 	public static long num = 0;
 	public static int threadNum = 0;
 	public static LocalDateTime start = LocalDateTime.now();
-	public static void main(String[] args){
-		//TODO: Use a loop
-		Card[] cards = initCards();
-		for (int b0 = 0; b0 < 4; b0++){
-			App.startNewRotationThread(cards.clone());
-//			App.tryAllRotations(cards);
-			cards[0].rotate();
-		}
-	}
+	public static StringBuilder outputBuilder;
+	public static int writesPending = 0;
+//	public static void main(String[] args){
+//		//TODO: Use a loop
+//		Card[] cards = initCards();
+//		for (int b0 = 0; b0 < 4; b0++){
+//			App.startNewRotationThread(cards.clone());
+////			App.tryAllRotations(cards);
+//			cards[0].rotate();
+//		}
+//	}
+	
 
 	public static Card[] initCards(){
 		Card[] cards = new Card[9];
@@ -29,7 +35,7 @@ public class App{
 		cards[5] = new Card(5, Card.CIRCULAR_HEAD, Card.STRIPED_BUTT, Card.CIRCULAR_BUTT, Card.TRIANGULAR_HEAD);
 		cards[6] = new Card(6, Card.TRIANGULAR_HEAD, Card.NAKED_BUTT, Card.STRIPED_BUTT, Card.CIRCULAR_HEAD);
 		cards[7] = new Card(7, Card.TRIANGULAR_HEAD, Card.CIRCULAR_BUTT, Card.NAKED_BUTT, Card.STRIPED_HEAD);
-		cards[8] = new Card(8, Card.TRIANGULAR_HEAD, Card.STRIPED_BUTT, Card.CIRCULAR_BUTT, Card.STRIPED_HEAD);
+		cards[8] = new Card(8,Card.TRIANGULAR_HEAD, Card.STRIPED_BUTT, Card.CIRCULAR_BUTT, Card.STRIPED_HEAD);
 		return cards;
 	}
 
@@ -62,7 +68,6 @@ public class App{
 	}
 	
 	public static void tryAllRotations(Card[] cards){
-		System.out.println("Banane");
 		for (int b1 = 0; b1 < 4; b1++){
 			for (int b2 = 0; b2 < 4; b2++){
 				for(int b3 = 0; b3 < 4; b3++){
@@ -130,14 +135,14 @@ public class App{
 																			if (num % 10000000 == 0){
 																				Duration d = Duration.between(start, LocalDateTime.now());
 																				if (d.getSeconds() != 0){
-																					System.out.println(num/1000000d + " million combinations in " + d.getSeconds() + " seconds (" + num/d.getSeconds() + " combinations/sec, " + threadNum + " Threads)");																					
+																					output(num/1000000d + " million combinations in " + d.getSeconds() + " seconds (" + num/d.getSeconds() + " combinations/sec, " + threadNum + " Threads)");																					
 																				} else {
-																					System.out.println("waiting...");
+																					output("waiting...");
 																				}
 																			}
 //																			num = (num + 1) % 1000000;
-																			if (num == 0) printBoard(c);
-//																			printBoard(c);
+//																			if (num == 0) printBoard(c);
+																			if (App.check(c)) printBoard(c);
 //																			try {
 //																				Thread.sleep(100);
 //																			} catch (InterruptedException e) {
@@ -168,7 +173,7 @@ public class App{
 		for (int i = 0; i < cards.length; i++){
 			result = result + "[" + cards[i].rotation + "]";
 		}
-		System.out.println(result);
+		output(result);
 	}
 	
 	public static void printBoard(Card[][] board){
@@ -179,17 +184,16 @@ public class App{
 		String[] current = new String[5];
 		for (int i = 0; i < 3; i++){
 			for (int j = 0; j < 3; j++){
-				current = board[i][j].print(true);
+				current = board[i][j].print(false);
 				for (int k = 0; k < current.length; k++){
 					strings[k + i * 5] = strings[k + i*5] + current[k];
 				}
 			}
 		}
 		for (String s : strings){
-			System.out.println(s);
+			output(s);
 		}
-		System.out.println();
-		System.out.println();
+		output(System.lineSeparator());
 	}
 	
 	public static void startNewCombinationThread(Card[] cards){
@@ -230,5 +234,70 @@ public class App{
 			}
 		}
 		new RotationThread(cards).start();
+	}
+	
+	public static void output(String line){
+		System.out.println(line);
+		if (outputBuilder == null) outputBuilder = new StringBuilder();
+		outputBuilder.append(line + System.lineSeparator());
+		App.writesPending++;
+		if (App.writesPending==10){
+			App.appendStringBuilder(new File("Log.txt"), outputBuilder);
+			outputBuilder = new StringBuilder();
+			App.writesPending = 0;
+		}
+	}
+	
+	public static void appendStringBuilder(File out, StringBuilder in){
+		StringBuilder result = App.readStringBuilder(out);
+//		result.append(System.lineSeparator());
+		result.append(in);
+		App.writeStringBuilder(out, result);
+	}
+	
+	public static void writeStringBuilder (File out, StringBuilder in){
+		BufferedWriter writer;
+		try {
+	    	writer = new BufferedWriter(new FileWriter(out));
+			writer.append(in);
+			writer.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+		}
+	}
+
+	public static void writeString (File out, String in){
+		BufferedWriter writer;
+		try {
+	    	writer = new BufferedWriter(new FileWriter(out));
+			writer.append(in);
+			writer.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+		}
+	}
+	
+	public static StringBuilder readStringBuilder (File in) {
+	    StringBuilder text = new StringBuilder();
+	    int read, N = 1024 * 1024;
+	    char[] buffer = new char[N];
+
+	    try {
+	        FileReader fr = new FileReader(in);
+	        BufferedReader br = new BufferedReader(fr);
+
+	        while(true) {
+	            read = br.read(buffer, 0, N);
+	            text.append(new String(buffer, 0, read));
+
+	            if(read < N) {
+	            	br.close();
+	                break;
+	            }
+	        }
+	    } catch(Exception e) {
+	    }
+
+	    return text;
 	}
 }
