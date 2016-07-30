@@ -187,4 +187,27 @@ public class Util {
 		}
 		return (Card[])result.toArray();
 	}
+	
+	public String getTypeString(int type){
+		switch(type){
+		case NAKED_BUTT: return "NB";
+		case NAKED_HEAD: return "NH";
+		case STRIPED_BUTT: return "SB";
+		case STRIPED_HEAD: return "SH";
+		case TRIANGULAR_BUTT: return "TB";
+		case TRIANGULAR_HEAD: return "TH";
+		case CIRCULAR_BUTT: return "CB";
+		case CIRCULAR_HEAD: return "CH";
+		default: return "NA";
+		}
+	}
+	
+	public static boolean fits(int type1, int type2){
+		if (isOdd(type1)) return type1 - 1 == type2;
+		else return type1 + 1 == type2;
+	}
+
+	public static boolean isOdd(int i){
+		return i % 2 == 1;
+	}
 }
