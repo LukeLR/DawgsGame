@@ -153,9 +153,9 @@ public class Util {
 	    return text;
 	}
 	
-	public static Card[] getUnusedCards(Card[] cards){
-		ArrayList<Card> result = new ArrayList<Card>();
-		for (Card card : cards){
+	public static Card[] getUnusedCards(Card2[] cards){
+		ArrayList<Card2> result = new ArrayList<Card2>();
+		for (Card2 card : cards){
 			if (!card.used) result.add(card);
 		}
 		return (Card[])result.toArray();

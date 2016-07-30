@@ -16,8 +16,6 @@ public class Card {
 
 	public int number, top, right, bottom, left, rotation;
 	
-	public boolean used = false;
-
 	public Card (int number, int top, int right, int bottom, int left){
 		this.number = number;
 		this.top = top;
