@@ -10,6 +10,15 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class Util {
+	public static final int TOPLEFTBORDER = 0;
+	public static final int TOPBORDER = 1;
+	public static final int TOPRIGHTBORDER = 2;
+	public static final int RIGHTBORDER = 3;
+	public static final int BOTTOMRIGHTBORDER = 4;
+	public static final int BOTTOMBORDER = 5;
+	public static final int BOTTOMLEFTBORDER = 6;
+	public static final int LEFTBORDER = 7;
+	
 	public static StringBuilder outputBuilder;
 	public static LocalDateTime start = LocalDateTime.now();
 	public static long num = 0;
