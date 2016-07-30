@@ -1,12 +1,8 @@
 package app;
 
-public class Card2 extends Card {
-	private Card2 leftCard, topCard, rightCard, bottomCard;
+public class Slot {
+	private Card leftCard, topCard, rightCard, bottomCard;
 	public boolean used = false;
-	
-	public Card2(int number, int top, int right, int bottom, int left) {
-		super(number, top, right, bottom, left);
-	}
 
 	public boolean hasLeft(){ return leftCard != null;}
 	public boolean hasTop(){ return topCard != null;}
