@@ -162,7 +162,29 @@ public class Util {
 	public static Card[] getFittingCards(Card center, int direction, Card[] availableCards){
 		ArrayList<Card> result = new ArrayList<Card>();
 		switch(direction){
-		case Card.
+		case Card.LEFT:
+			for (Card card : availableCards){
+				if (Card.fits(center.right, card.left)) result.add(card);
+			}
+			break;
+		case Card.TOP:
+			for (Card card : availableCards){
+				if (Card.fits(center.top, card.bottom)) result.add(card);
+			}
+			break;
+		case Card.RIGHT:
+			for (Card card : availableCards){
+				if (Card.fits(center.right, card.left)) result.add(card);
+			}
+			break;
+		case Card.BOTTOM:
+			for (Card card : availableCards){
+				if (Card.fits(center.bottom, card.top)) result.add(card);
+			}
+			break;
+		default:
+			throw new RuntimeException("Wrong direction given to getFittingCards! Must be one of Card.LEFT, Card.TOP, Card.RIGHT, Card.BOTTOM!");
 		}
+		return (Card[])result.toArray();
 	}
 }
