@@ -32,21 +32,23 @@ public class Util {
 	
 	public static boolean check(Card[][] c){
 		//TODO: Use a loop
+		if (c.length != 3 || c[0].length != 3)
+			throw new RuntimeException("Invalid Field passed to Util.check! Must be of Type Card[3][3]!");
 		return
-		Card.fits(c[0][0].right, c[1][0].left) &&
-		Card.fits(c[0][0].bottom, c[0][1].top) &&
-		Card.fits(c[1][0].right, c[2][0].left) &&
-		Card.fits(c[1][0].bottom, c[1][1].top) &&
-		Card.fits(c[2][0].bottom, c[2][1].top) &&
+		Util.fits(c[0][0].right, c[1][0].left) &&
+		Util.fits(c[0][0].bottom, c[0][1].top) &&
+		Util.fits(c[1][0].right, c[2][0].left) &&
+		Util.fits(c[1][0].bottom, c[1][1].top) &&
+		Util.fits(c[2][0].bottom, c[2][1].top) &&
 
-		Card.fits(c[0][1].right, c[1][1].left) &&
-		Card.fits(c[0][1].bottom, c[0][2].top) &&
-		Card.fits(c[1][1].right, c[2][1].left) &&
-		Card.fits(c[1][1].bottom, c[1][2].top) &&
-		Card.fits(c[2][1].bottom, c[2][2].top) &&
+		Util.fits(c[0][1].right, c[1][1].left) &&
+		Util.fits(c[0][1].bottom, c[0][2].top) &&
+		Util.fits(c[1][1].right, c[2][1].left) &&
+		Util.fits(c[1][1].bottom, c[1][2].top) &&
+		Util.fits(c[2][1].bottom, c[2][2].top) &&
 
-		Card.fits(c[0][2].right, c[1][2].left) &&
-		Card.fits(c[1][2].right, c[2][2].left);
+		Util.fits(c[0][2].right, c[1][2].left) &&
+		Util.fits(c[1][2].right, c[2][2].left);
 		
 	}
 	
@@ -164,22 +166,22 @@ public class Util {
 		switch(direction){
 		case Card.LEFT:
 			for (Card card : availableCards){
-				if (Card.fits(center.right, card.left)) result.add(card);
+				if (Util.fits(center.right, card.left)) result.add(card);
 			}
 			break;
 		case Card.TOP:
 			for (Card card : availableCards){
-				if (Card.fits(center.top, card.bottom)) result.add(card);
+				if (Util.fits(center.top, card.bottom)) result.add(card);
 			}
 			break;
 		case Card.RIGHT:
 			for (Card card : availableCards){
-				if (Card.fits(center.right, card.left)) result.add(card);
+				if (Util.fits(center.right, card.left)) result.add(card);
 			}
 			break;
 		case Card.BOTTOM:
 			for (Card card : availableCards){
-				if (Card.fits(center.bottom, card.top)) result.add(card);
+				if (Util.fits(center.bottom, card.top)) result.add(card);
 			}
 			break;
 		default:
@@ -190,14 +192,14 @@ public class Util {
 	
 	public String getTypeString(int type){
 		switch(type){
-		case NAKED_BUTT: return "NB";
-		case NAKED_HEAD: return "NH";
-		case STRIPED_BUTT: return "SB";
-		case STRIPED_HEAD: return "SH";
-		case TRIANGULAR_BUTT: return "TB";
-		case TRIANGULAR_HEAD: return "TH";
-		case CIRCULAR_BUTT: return "CB";
-		case CIRCULAR_HEAD: return "CH";
+		case Card.NAKED_BUTT: return "NB";
+		case Card.NAKED_HEAD: return "NH";
+		case Card.STRIPED_BUTT: return "SB";
+		case Card.STRIPED_HEAD: return "SH";
+		case Card.TRIANGULAR_BUTT: return "TB";
+		case Card.TRIANGULAR_HEAD: return "TH";
+		case Card.CIRCULAR_BUTT: return "CB";
+		case Card.CIRCULAR_HEAD: return "CH";
 		default: return "NA";
 		}
 	}
