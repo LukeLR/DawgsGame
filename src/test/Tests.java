@@ -1,6 +1,7 @@
 package test;
 
 import static org.junit.Assert.*;
+import app.Util;
 
 import org.junit.Test;
 
@@ -66,44 +67,44 @@ public class Tests {
 	
 	@Test
 	public void testFits(){
-		assertEquals(true, Card.fits(Card.STRIPED_BUTT, Card.STRIPED_HEAD));
-		assertEquals(true, Card.fits(Card.STRIPED_HEAD, Card.STRIPED_BUTT));
-		assertEquals(true, Card.fits(Card.NAKED_BUTT, Card.NAKED_HEAD));
-		assertEquals(true, Card.fits(Card.NAKED_HEAD, Card.NAKED_BUTT));
-		assertEquals(true, Card.fits(Card.CIRCULAR_BUTT, Card.CIRCULAR_HEAD));
-		assertEquals(true, Card.fits(Card.CIRCULAR_HEAD, Card.CIRCULAR_BUTT));
-		assertEquals(true, Card.fits(Card.TRIANGULAR_BUTT, Card.TRIANGULAR_HEAD));
-		assertEquals(true, Card.fits(Card.TRIANGULAR_HEAD, Card.TRIANGULAR_BUTT));
+		assertEquals(true, Util.fits(Card.STRIPED_BUTT, Card.STRIPED_HEAD));
+		assertEquals(true, Util.fits(Card.STRIPED_HEAD, Card.STRIPED_BUTT));
+		assertEquals(true, Util.fits(Card.NAKED_BUTT, Card.NAKED_HEAD));
+		assertEquals(true, Util.fits(Card.NAKED_HEAD, Card.NAKED_BUTT));
+		assertEquals(true, Util.fits(Card.CIRCULAR_BUTT, Card.CIRCULAR_HEAD));
+		assertEquals(true, Util.fits(Card.CIRCULAR_HEAD, Card.CIRCULAR_BUTT));
+		assertEquals(true, Util.fits(Card.TRIANGULAR_BUTT, Card.TRIANGULAR_HEAD));
+		assertEquals(true, Util.fits(Card.TRIANGULAR_HEAD, Card.TRIANGULAR_BUTT));
 	}
 	
 	@Test
 	public void testFitsFailed(){
-		assertEquals(false, Card.fits(Card.CIRCULAR_BUTT, Card.STRIPED_BUTT));
-		assertEquals(false, Card.fits(Card.CIRCULAR_BUTT, Card.STRIPED_HEAD));
-		assertEquals(false, Card.fits(Card.CIRCULAR_BUTT, Card.NAKED_BUTT));
-		assertEquals(false, Card.fits(Card.CIRCULAR_BUTT, Card.NAKED_HEAD));
-		assertEquals(false, Card.fits(Card.CIRCULAR_BUTT, Card.TRIANGULAR_BUTT));
-		assertEquals(false, Card.fits(Card.CIRCULAR_BUTT, Card.TRIANGULAR_HEAD));
+		assertEquals(false, Util.fits(Card.CIRCULAR_BUTT, Card.STRIPED_BUTT));
+		assertEquals(false, Util.fits(Card.CIRCULAR_BUTT, Card.STRIPED_HEAD));
+		assertEquals(false, Util.fits(Card.CIRCULAR_BUTT, Card.NAKED_BUTT));
+		assertEquals(false, Util.fits(Card.CIRCULAR_BUTT, Card.NAKED_HEAD));
+		assertEquals(false, Util.fits(Card.CIRCULAR_BUTT, Card.TRIANGULAR_BUTT));
+		assertEquals(false, Util.fits(Card.CIRCULAR_BUTT, Card.TRIANGULAR_HEAD));
 		
-		assertEquals(false, Card.fits(Card.NAKED_BUTT, Card.CIRCULAR_BUTT));
-		assertEquals(false, Card.fits(Card.NAKED_BUTT, Card.CIRCULAR_HEAD));
-		assertEquals(false, Card.fits(Card.NAKED_BUTT, Card.STRIPED_BUTT));
-		assertEquals(false, Card.fits(Card.NAKED_BUTT, Card.STRIPED_HEAD));
-		assertEquals(false, Card.fits(Card.NAKED_BUTT, Card.TRIANGULAR_BUTT));
-		assertEquals(false, Card.fits(Card.NAKED_BUTT, Card.TRIANGULAR_HEAD));
+		assertEquals(false, Util.fits(Card.NAKED_BUTT, Card.CIRCULAR_BUTT));
+		assertEquals(false, Util.fits(Card.NAKED_BUTT, Card.CIRCULAR_HEAD));
+		assertEquals(false, Util.fits(Card.NAKED_BUTT, Card.STRIPED_BUTT));
+		assertEquals(false, Util.fits(Card.NAKED_BUTT, Card.STRIPED_HEAD));
+		assertEquals(false, Util.fits(Card.NAKED_BUTT, Card.TRIANGULAR_BUTT));
+		assertEquals(false, Util.fits(Card.NAKED_BUTT, Card.TRIANGULAR_HEAD));
 		
-		assertEquals(false, Card.fits(Card.STRIPED_BUTT, Card.CIRCULAR_BUTT));
-		assertEquals(false, Card.fits(Card.STRIPED_BUTT, Card.CIRCULAR_HEAD));
-		assertEquals(false, Card.fits(Card.STRIPED_BUTT, Card.NAKED_BUTT));
-		assertEquals(false, Card.fits(Card.STRIPED_BUTT, Card.NAKED_HEAD));
-		assertEquals(false, Card.fits(Card.STRIPED_BUTT, Card.TRIANGULAR_BUTT));
-		assertEquals(false, Card.fits(Card.STRIPED_BUTT, Card.TRIANGULAR_HEAD));
+		assertEquals(false, Util.fits(Card.STRIPED_BUTT, Card.CIRCULAR_BUTT));
+		assertEquals(false, Util.fits(Card.STRIPED_BUTT, Card.CIRCULAR_HEAD));
+		assertEquals(false, Util.fits(Card.STRIPED_BUTT, Card.NAKED_BUTT));
+		assertEquals(false, Util.fits(Card.STRIPED_BUTT, Card.NAKED_HEAD));
+		assertEquals(false, Util.fits(Card.STRIPED_BUTT, Card.TRIANGULAR_BUTT));
+		assertEquals(false, Util.fits(Card.STRIPED_BUTT, Card.TRIANGULAR_HEAD));
 		
-		assertEquals(false, Card.fits(Card.TRIANGULAR_BUTT, Card.NAKED_BUTT));
-		assertEquals(false, Card.fits(Card.TRIANGULAR_BUTT, Card.NAKED_HEAD));
-		assertEquals(false, Card.fits(Card.TRIANGULAR_BUTT, Card.CIRCULAR_BUTT));
-		assertEquals(false, Card.fits(Card.TRIANGULAR_BUTT, Card.CIRCULAR_HEAD));
-		assertEquals(false, Card.fits(Card.TRIANGULAR_BUTT, Card.STRIPED_BUTT));
-		assertEquals(false, Card.fits(Card.TRIANGULAR_BUTT, Card.STRIPED_HEAD));
+		assertEquals(false, Util.fits(Card.TRIANGULAR_BUTT, Card.NAKED_BUTT));
+		assertEquals(false, Util.fits(Card.TRIANGULAR_BUTT, Card.NAKED_HEAD));
+		assertEquals(false, Util.fits(Card.TRIANGULAR_BUTT, Card.CIRCULAR_BUTT));
+		assertEquals(false, Util.fits(Card.TRIANGULAR_BUTT, Card.CIRCULAR_HEAD));
+		assertEquals(false, Util.fits(Card.TRIANGULAR_BUTT, Card.STRIPED_BUTT));
+		assertEquals(false, Util.fits(Card.TRIANGULAR_BUTT, Card.STRIPED_HEAD));
 	}
 }
