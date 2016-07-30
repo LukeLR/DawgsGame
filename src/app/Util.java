@@ -152,10 +152,17 @@ public class Util {
 	}
 	
 	public static Card[] getUnusedCards(Card[] cards){
-		ArrayList result = new ArrayList();
+		ArrayList<Card> result = new ArrayList<Card>();
 		for (Card card : cards){
 			if (!card.used) result.add(card);
 		}
 		return (Card[])result.toArray();
+	}
+	
+	public static Card[] getFittingCards(Card center, int direction, Card[] availableCards){
+		ArrayList<Card> result = new ArrayList<Card>();
+		switch(direction){
+		case Card.
+		}
 	}
 }

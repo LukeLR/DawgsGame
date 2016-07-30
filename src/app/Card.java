@@ -8,8 +8,15 @@ public class Card {
 	public static final int TRIANGULAR_HEAD = 5;
 	public static final int CIRCULAR_BUTT = 6;
 	public static final int CIRCULAR_HEAD = 7;
+	
+	public static final int TOP = -1;
+	public static final int RIGHT = -2;
+	public static final int BOTTOM = -3;
+	public static final int LEFT = -4;
 
 	public int number, top, right, bottom, left, rotation;
+	
+	public boolean used = false;
 
 	public Card (int number, int top, int right, int bottom, int left){
 		this.number = number;
