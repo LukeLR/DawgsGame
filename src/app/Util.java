@@ -190,7 +190,7 @@ public class Util {
 		return (Card[])result.toArray();
 	}
 	
-	public String getTypeString(int type){
+	public static String getTypeString(int type){
 		switch(type){
 		case Card.NAKED_BUTT: return "NB";
 		case Card.NAKED_HEAD: return "NH";

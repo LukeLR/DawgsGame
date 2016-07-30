@@ -39,9 +39,9 @@ public class Card {
 	public String[] print(){
 		String[] result = new String[5];
 		result[0] = "+------+";
-		result[1] = "|  " + getTypeString(top) + "  |";
-		result[2] = "|" + getTypeString(left) + "  " + getTypeString(right) + "|";
-		result[3] = "|  " + getTypeString(bottom) + "  |";
+		result[1] = "|  " + Util.getTypeString(top) + "  |";
+		result[2] = "|" + Util.getTypeString(left) + "  " + Util.getTypeString(right) + "|";
+		result[3] = "|  " + Util.getTypeString(bottom) + "  |";
 		result[4] = "+------+";
 		return result;
 	}
